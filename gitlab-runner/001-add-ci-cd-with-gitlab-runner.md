@@ -13,10 +13,11 @@ sudo chmod +x /usr/local/bin/gitlab-runner
 # Create a GitLab Runner user
 sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
 
+
 # Install and run as a service
+# change user with user prefered and change working-directory also
 sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
 sudo gitlab-runner start
-
 ```
 
 ### Register runner 
