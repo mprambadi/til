@@ -1,7 +1,7 @@
 title: Today I Learned
 description: Short notes on things I learned today
 baseurl: ""
-url: "https://maulana.github.io/today-i-learned"
+url: "https://til.mprambadi.my.id"
 
 markdown: kramdown
 highlighter: rouge
