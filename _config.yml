@@ -1,0 +1,28 @@
+title: Today I Learned
+description: Short notes on things I learned today
+baseurl: ""
+url: "https://maulana.github.io/today-i-learned"
+
+markdown: kramdown
+highlighter: rouge
+
+permalink: /:categories/:title/
+
+posts:
+  output: true
+  permalink: /:categories/:title/
+
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      layout: "post"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - node_modules
+  - vendor
+  - .DS_Store

@@ -1,8 +1,16 @@
+---
+title: "Tailscale + VPN + Docker Network Conflict"
+date: 2026-06-12
+category: networking
+tags: [tailscale, vpn, docker, networking, openfortivpn]
+summary: "Troubleshooting Tailscale, OpenFortiVPN, and Docker network conflicts with subnet routing"
+---
+
 # Tailscale + OpenFortiVPN + Docker Network Conflict Troubleshooting
 
 ## Problem
 
-I was connected to FortiVPN using `openfortivpn` and could not access internal resources such as:
+Connected to FortiVPN using `openfortivpn` and could not access internal resources:
 
 ```bash
 nc -vz 10.10.0.137 443
@@ -10,10 +18,10 @@ nc -vz 10.10.0.137 443
 
 The connection timed out even though:
 
-* VPN was connected successfully.
-* Routes to internal networks existed.
-* DNS resolution through VPN worked.
-* Traffic was leaving through the VPN interface.
+- VPN was connected successfully.
+- Routes to internal networks existed.
+- DNS resolution through VPN worked.
+- Traffic was leaving through the VPN interface.
 
 ---
 
@@ -76,14 +84,14 @@ SYN  -> 10.10.0.137
 
 Important observation:
 
-* Remote host replied with SYN-ACK.
-* Local machine never completed TCP handshake with ACK.
+- Remote host replied with SYN-ACK.
+- Local machine never completed TCP handshake with ACK.
 
 This proved:
 
-* VPN routing worked.
-* Remote server was reachable.
-* Problem was local.
+- VPN routing worked.
+- Remote server was reachable.
+- Problem was local.
 
 ---
 
@@ -264,8 +272,8 @@ Found:
 
 Meaning:
 
-* Headscale had approved routes.
-* Pop-OS was no longer advertising them.
+- Headscale had approved routes.
+- Pop-OS was no longer advertising them.
 
 ---
 
@@ -334,7 +342,7 @@ sudo sysctl --system
 
 ---
 
-# Lessons Learned
+## Lessons Learned
 
 1. If VPN traffic receives SYN-ACK but TCP never establishes, suspect local networking conflicts.
 2. Docker bridge networks can silently overlap VPN-assigned subnets.
@@ -346,4 +354,3 @@ sudo sysctl --system
 8. Verify packet flow with `tcpdump` before changing routes or firewall rules.
 9. A successful VPN connection does not guarantee usable routing.
 10. `headscale node list-routes` is the fastest way to verify subnet router health.
-
